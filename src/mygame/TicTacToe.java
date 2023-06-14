@@ -1,6 +1,5 @@
 package mygame;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -31,21 +30,7 @@ public class TicTacToe implements ActionListener{
 	JButton b;
 	JLabel l;
 	
-	void turn()
-	{
-		Random rand= new Random();
-		int turn= rand.nextInt(2);
-		if(turn==0)
-		{
-			player1_turn= true;
-			player2_turn= false;
-		}
-		else
-		{
-			player1_turn= false;
-			player2_turn= true;
-		}
-	}
+	
 	TicTacToe()
 	{
 		frame= new JFrame("TIC TAC TOE");
@@ -98,7 +83,25 @@ public class TicTacToe implements ActionListener{
 		
 		font = new Font("Times New Roman", Font.BOLD, 40);
 		
-		turn();
+		firstturn();
+	}
+	
+	void firstturn()
+	{
+		Random rand= new Random();
+		int turn= rand.nextInt(2);
+		if(turn==0)
+		{
+			player1_turn= true;
+			player2_turn= false;
+			l.setText("Player 1 turn");
+		}
+		else
+		{
+			player1_turn= false;
+			player2_turn= true;
+			l.setText("Player 2 turn");
+		}
 	}
 	
 	
@@ -113,6 +116,7 @@ public class TicTacToe implements ActionListener{
 			{
 				buttons[i].setEnabled(true);
 				buttons[i].setText("");
+				
 			}
 			
 			if (e.getSource()== buttons[i] && player1_turn) 
@@ -120,16 +124,16 @@ public class TicTacToe implements ActionListener{
 	            buttons[i].setText(X); 
 	            player1_turn = false;
 	            player2_turn = true;
-	            l.setText("O turn");
 	            l.setFont(font);
+	            l.setText("Player 2 turn");
 	        }
 			 else if(e.getSource()== buttons[i] && player2_turn)
 	        {
 	        	 buttons[i].setText(O); 
 	        	 player1_turn = true;
 	             player2_turn = false;
-	             l.setText("X turn");
 	             l.setFont(font);
+	             l.setText("Player 1 turn");
 	        }
 		}
 		checkWinner();
