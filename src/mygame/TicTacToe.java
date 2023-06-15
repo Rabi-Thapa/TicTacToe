@@ -2,7 +2,6 @@ package mygame;
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,7 +11,6 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class TicTacToe implements ActionListener{
@@ -29,7 +27,6 @@ public class TicTacToe implements ActionListener{
 	JPanel p2;
 	JButton b;
 	JLabel l;
-	
 	
 	TicTacToe()
 	{
@@ -90,27 +87,25 @@ public class TicTacToe implements ActionListener{
 	{
 		Random rand= new Random();
 		int turn= rand.nextInt(2);
+		
 		if(turn==0)
 		{
 			player1_turn= true;
 			player2_turn= false;
-			l.setText("Player 1 turn");
+			l.setText("X turn");
 		}
 		else
 		{
 			player1_turn= false;
 			player2_turn= true;
-			l.setText("Player 2 turn");
+			l.setText("O turn");
 		}
 	}
 	
-	
-	
-	int i;
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		for(i=0; i< buttons.length; i++)
+		for(int i=0; i< buttons.length; i++)
 		{
 			if(e.getSource() == b)
 			{
@@ -125,7 +120,7 @@ public class TicTacToe implements ActionListener{
 	            player1_turn = false;
 	            player2_turn = true;
 	            l.setFont(font);
-	            l.setText("Player 2 turn");
+	            l.setText("O turn");
 	        }
 			 else if(e.getSource()== buttons[i] && player2_turn)
 	        {
@@ -133,7 +128,7 @@ public class TicTacToe implements ActionListener{
 	        	 player1_turn = true;
 	             player2_turn = false;
 	             l.setFont(font);
-	             l.setText("Player 1 turn");
+	             l.setText("X turn");
 	        }
 		}
 		checkWinner();
@@ -222,7 +217,7 @@ public class TicTacToe implements ActionListener{
 		}
 		if(fullBoard)
 		{
-			JOptionPane.showMessageDialog(p1,"Its a tie");
+			l.setText("Tie");
 			disableButtons();
 		}
     }
@@ -233,7 +228,7 @@ public class TicTacToe implements ActionListener{
 		{
 			buttons[i].setEnabled(false);
 		}
-		JOptionPane.showMessageDialog(p1, "Player X wins");
+		l.setText("X win");
 	}
 	void disableButtons()
 	{
@@ -249,7 +244,7 @@ public class TicTacToe implements ActionListener{
 		{
 			buttons[i].setEnabled(false);
 		}
-		JOptionPane.showMessageDialog(p1, "Player O wins");
+		l.setText("O win");
 	}
 	public static void main(String[] args)
 	{
