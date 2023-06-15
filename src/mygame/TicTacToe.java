@@ -54,7 +54,7 @@ public class TicTacToe implements ActionListener{
 		c.add(p1);
 		c.add(p2);
 		
-		font= new Font("Times New Roman", Font.BOLD, 40);
+		font= new Font("Consolas", Font.BOLD, 40);
 		for(int i=0; i< buttons.length; i++)
 		{
 			buttons[i]= new JButton();
@@ -69,7 +69,7 @@ public class TicTacToe implements ActionListener{
 		l.setBounds(0, 0, 100, 50);
 		l.setFont(font);
 		
-		font= new Font("Times New Roman", Font.BOLD, 20);
+		font= new Font("Consolas", Font.BOLD, 20);
 		b= new JButton("Reset");
 		b.setBounds(230, 490, 100, 60);
 		b.setFocusable(false);
@@ -81,7 +81,7 @@ public class TicTacToe implements ActionListener{
 		frame.add(p2);
 		frame.add(p1);
 		
-		font = new Font("Times New Roman", Font.BOLD, 40);
+		font = new Font("Consolas", Font.BOLD, 40);
 		
 		firstturn();
 	}
@@ -209,6 +209,22 @@ public class TicTacToe implements ActionListener{
 		{
 			oWins(2,4,6);
 		}
+		
+		
+		boolean fullBoard= true;
+		for(JButton button: buttons)
+		{
+			if(button.getText().isEmpty())
+			{
+				fullBoard= false;
+				break;
+			}
+		}
+		if(fullBoard)
+		{
+			JOptionPane.showMessageDialog(p1,"Its a tie");
+			disableButtons();
+		}
     }
 
 	public void xWins(int a,int b,int c) 
@@ -218,6 +234,13 @@ public class TicTacToe implements ActionListener{
 			buttons[i].setEnabled(false);
 		}
 		JOptionPane.showMessageDialog(p1, "Player X wins");
+	}
+	void disableButtons()
+	{
+		for(JButton button: buttons)
+		{
+			button.setEnabled(false);
+		}
 	}
 	
 	public void oWins(int a, int b, int c)
